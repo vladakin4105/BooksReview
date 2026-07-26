@@ -1,10 +1,10 @@
-# 📚 Platformă de Recenzii Cărți - Hackathon Project
+# Platformă de Recenzii Cărți 
 
 Acesta este proiectul nostru pentru Hackathon. Este o aplicație web minimală care permite stocarea, vizualizarea și analizarea inteligentă a recenziilor de cărți. 
 
 Aplicația este construită în Python (FastAPI) cu o bază de date SQLite (pentru portabilitate maximă) și integrează API-ul Google Gemini pentru a face analiza sentimentelor (Sentiment Analysis) pe recenziile adăugate de utilizatori.
 
-## 🛠️ Tehnologii Folosite
+## Tehnologii Folosite
 * **Backend:** Python, FastAPI, SQLAlchemy
 * **Frontend:** HTML5, Bootstrap, Vanilla JS (Jinja2 Templates)
 * **Bază de date:** SQLite (local)
@@ -12,7 +12,7 @@ Aplicația este construită în Python (FastAPI) cu o bază de date SQLite (pent
 
 ---
 
-## 🚀 Cum să rulezi proiectul local
+## Cum să rulezi proiectul local
 
 Urmați acești pași pentru a porni aplicația pe laptopurile voastre.
 
@@ -45,7 +45,7 @@ Porniți aplicația rulând:
 
 ---
 
-## 📁 Structura Proiectului
+## Structura Proiectului
 * `main.py` - Logica principală (rutele FastAPI).
 * `database.py` & `models.py` - Configurarea SQLite și structura tabelelor.
 * `gemini_api.py` - Integrarea AI-ului pentru analiza sentimentului pe recenzii.
@@ -56,7 +56,7 @@ Porniți aplicația rulând:
 
 ---
 
-## 🎯 Ce mai avem de făcut (To-Do Luni)
+## Ce mai avem de făcut (To-Do Luni)
 Pentru a ne asigura că bifăm toate cerințele oficiale:
 1. **Azure Data Factory (ADF):** Luni trebuie să folosim ADF pentru a importa oficial datele din fișierul nostru CSV într-o bază de date.
 2. **PowerBI:** Trebuie să creăm două rapoarte vizuale pe baza setului nostru de date.
