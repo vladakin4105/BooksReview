@@ -31,7 +31,7 @@ Cu mediul virtual activat, rulați comanda:
 `pip install -r requirements.txt`
 
 ### Pasul 3: Configurarea cheii API
-Creați un fișier nou numit `.env` în folderul principal (lângă `main.py`) și adăugați cheia Gemini (cereți-i-o colegului care a generat-o):
+Creați un fișier nou numit `.env` în folderul principal (lângă `main.py`) și adăugați cheia Gemini:
 `GEMINI_API_KEY=cheia_noastra_secreta_aici`
 
 ### Pasul 4: Popularea bazei de date (Pentru Testare Locală)
