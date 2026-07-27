@@ -1,0 +1,186 @@
+/* 1. Importăm fontul bubbly */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+  /* Paleta Autumn Library */
+  --bg-color: #FDF8F5; 
+  --text-color: #4A3B32;
+  --brown-light: #D4A373;
+  --orange-autumn: #F4A261;
+  --red-accent: #E76F51;
+}
+
+/* 2. Suprascriem body-ul și forțăm fontul și culorile peste Bootstrap (folosind !important) */
+body {
+  font-family: 'Quicksand', sans-serif !important;
+  background-color: var(--bg-color) !important; 
+  color: var(--text-color) !important;
+}
+
+h3, h4, h5 {
+  font-weight: 700 !important;
+  color: var(--text-color) !important;
+}
+
+/* 3. Transformăm elementele list-group (cărțile) în carduri drăguțe */
+.list-group {
+  border-radius: 15px !important;
+  overflow: hidden; /* Ascunde colțurile ascuțite */
+}
+
+.list-group-item {
+  background-color: white !important;
+  border: 2px solid var(--brown-light) !important;
+  margin-bottom: 15px; /* Spațiu între cărți */
+  border-radius: 15px !important;
+  box-shadow: 0 4px 6px rgba(212, 163, 115, 0.2);
+}
+
+/* 4. Butoanele de favorite (Touch of red) */
+.btn-danger {
+  background-color: var(--red-accent) !important;
+  border-color: var(--red-accent) !important;
+  border-radius: 20px !important; /* Look bubbly */
+}
+
+.btn-outline-danger {
+  color: var(--red-accent) !important;
+  border-color: var(--red-accent) !important;
+  border-radius: 20px !important;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--red-accent) !important;
+  color: white !important;
+}
+
+/* 5. Cardul din dreapta (Recomandare AI) și butonul verde */
+.card {
+  border: 2px solid var(--orange-autumn) !important;
+  border-radius: 15px !important;
+  background-color: white !important;
+}
+
+.text-success {
+  color: var(--orange-autumn) !important; /* Schimbăm verdele Bootstrap în portocaliu */
+}
+
+.border-success {
+  border-color: var(--orange-autumn) !important;
+}
+
+.btn-success {
+  background-color: var(--orange-autumn) !important;
+  border: none !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+}
+
+.btn-success:hover {
+  background-color: #E0894B !important;
+}
+
+/* Stilizarea butoanelor de filtru */
+.filter-btn {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+  border: 2px solid var(--brown-light) !important;
+  border-radius: 20px !important;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  font-weight: 600 !important;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: var(--brown-light) !important;
+  color: white !important;
+}
+
+/* Cum arată butonul când e selectat */
+.filter-btn.active-filter {
+  background-color: var(--orange-autumn) !important;
+  border-color: var(--orange-autumn) !important;
+  color: white !important;
+}
+
+/* Importăm un font care arată ca scrisul de mână */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+
+/* Butonul plutitor din dreapta jos */
+.btn-floating-leaf {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--orange-autumn);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.btn-floating-leaf:hover {
+    transform: scale(1.1) rotate(15deg); /* Se rotește puțin la hover */
+    background-color: #d68748;
+}
+
+/* Design-ul bilețelului / hârtiei vechi */
+.vintage-note {
+    position: fixed;
+    bottom: 100px;
+    right: 40px;
+    width: 250px;
+    background-color: #F4E7C3; /* Culoare de hârtie veche/gălbuie */
+    padding: 25px 20px;
+    border-radius: 2px 15px 5px 20px; /* Margini ușor neregulate */
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(212, 163, 115, 0.2);
+    transform: rotate(3deg); /* Pare pus neglijent pe masă */
+    z-index: 999;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Clasa pentru a ascunde bilețelul */
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(10deg) translateY(20px);
+}
+
+/* Textul scris de mână */
+.handwritten-text {
+    font-family: 'Caveat', cursive !important;
+    font-size: 24px !important;
+    color: #3b2f27 !important;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.handwritten-author {
+    font-family: 'Caveat', cursive !important;
+    font-size: 18px !important;
+    color: #634f41 !important;
+    display: block;
+    text-align: right;
+}
+
+/* Butonul X de pe bilețel */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #8c7665;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #d9534f;
+}

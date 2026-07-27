@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Platformă Recenzii Cărți - Hackathon</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?v=1.0" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="bg-light">
@@ -13,9 +13,15 @@
             <!-- Coloana Stângă: Lista de cărți -->
             <div class="col-md-8">
                 <h3>Books❤️</h3>
+                <div class="mb-4" id="genre-filters">
+                        <button class="btn filter-btn active-filter" data-filter="all">Toate</button>
+                        <button class="btn filter-btn" data-filter="Fantezie">Fantezie</button>
+                        <button class="btn filter-btn" data-filter="Sci-Fi">Sci-Fi</button>
+                        <button class="btn filter-btn" data-filter="Dezvoltare Personala">Dezvoltare Personala</button>
+                </div>
                 <div class="list-group">
                     {% for book in books %}
-                        <div class="list-group-item">
+                        <div class="list-group-item book-item" data-genre="{{ book.genre }}">
                             <div class="d-flex w-100 justify-content-between align-items-center">
                                 <div>
                                     <h5 class="mb-1">{{ book.title }}</h5>
@@ -38,7 +44,7 @@
             <div class="col-md-4">
                 <!-- Card 2: Recomandare AI (NOU) -->
                 <div class="card p-3 shadow-sm border-success">
-                    <h4 class="text-success">Recomandare Personalizată 🎯</h4>
+                    <h4 class="text-success">Recomandare Personalizată</h4>
                     <p class="text-muted small">Gemini va analiza lista ta de favorite și îți va propune o carte nouă.</p>
                     <button id="btnRecommend" class="btn btn-success w-100">Obține Recomandare</button>
                     <div class="mt-3 text-center" id="recommendationResult"></div>
@@ -48,6 +54,17 @@
         </div>
     </div>
 
-    <script src="/static/script.js"></script>
+    <script src="/static/script.js?v=1.2"></script>
+
+    <!-- Butonul plutitor cu frunză -->
+    <button id="btn-note" class="btn-floating-leaf" title="Găsește un bilețel!">🍂</button>
+
+    <!-- Containerul pentru bilețelul vintage (ascuns inițial) -->
+    <div id="vintage-note-container" class="vintage-note hidden">
+        <button id="close-note" class="close-btn">✖</button>
+        <p id="note-text" class="handwritten-text"></p>
+        <span id="note-author" class="handwritten-author"></span>
+    </div>
+
 </body>
 </html>
