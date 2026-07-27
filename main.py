@@ -6,6 +6,9 @@ from sqlalchemy.orm import Session
 import database
 import models
 import gemini_api
+from fastapi import File, UploadFile
+import shutil
+import os
 
 # Cream tabelele in baza de date SQLite daca nu exista
 models.Base.metadata.create_all(bind=database.engine)
@@ -56,3 +59,25 @@ async def get_ai_recommendation(db: Session = Depends(database.get_db)):
     
     recomandare = gemini_api.get_book_recommendation(favorite_titles)
     return {"recomandare": recomandare}
+@app.get("/formular-azure")
+async def pagina_formular_azure(request: Request):
+    # Randeaza noua pagina de formular (Sintaxa corectata pt versiunile noi FastAPI)
+    return templates.TemplateResponse(request=request, name="azure_form.html")
+
+@app.post("/upload-azure")
+async def upload_for_azure(request: Request, file: UploadFile = File(...)):
+    # Ne asiguram ca folderul 'data' exista
+    os.makedirs("data", exist_ok=True)
+    
+    # Salvam fisierul ca si cum l-am pregati pentru ADF
+    file_location = f"data/adf_{file.filename}"
+    
+    with open(file_location, "wb+") as file_object:
+        shutil.copyfileobj(file.file, file_object)
+        
+    # Returnam aceeasi pagina cu sintaxa corectata
+    return templates.TemplateResponse(
+        request=request, 
+        name="azure_form.html", 
+        context={"mesaj_succes": f"Fișierul {file.filename} a fost salvat și este gata pentru ADF!"}
+    )
