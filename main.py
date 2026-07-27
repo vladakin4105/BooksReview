@@ -38,3 +38,21 @@ async def analyze_review(review_text: str = Form(...)):
     # Apelam functia scrisa de noi din gemini_api.py
     sentiment = gemini_api.analyze_review_sentiment(review_text)
     return {"original_text": review_text, "sentiment_gemini": sentiment}
+
+@app.put("/api/books/{book_id}/favorite")
+async def toggle_favorite(book_id: int, db: Session = Depends(database.get_db)):
+    book = db.query(models.Book).filter(models.Book.id == book_id).first()
+    if not book:
+        return {"error": "Cartea nu a fost găsită"}
+    
+    book.is_favorite = not book.is_favorite
+    db.commit()
+    return {"id": book.id, "title": book.title, "is_favorite": book.is_favorite}
+
+@app.get("/api/recommendation")
+async def get_ai_recommendation(db: Session = Depends(database.get_db)):
+    favorite_books_db = db.query(models.Book).filter(models.Book.is_favorite == True).all()
+    favorite_titles = [book.title for book in favorite_books_db]
+    
+    recomandare = gemini_api.get_book_recommendation(favorite_titles)
+    return {"recomandare": recomandare}

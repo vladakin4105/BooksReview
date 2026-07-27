@@ -8,21 +8,23 @@ load_dotenv()
 # Preluam cheia din .env
 API_KEY = os.getenv("GEMINI_API_KEY")
 
-def analyze_review_sentiment(review_text: str) -> str:
+def get_book_recommendation(favorite_books: list) -> str:
     """
-    Foloseste direct REST API-ul Gemini.
-    Folosim pointer-ul 'gemini-flash-latest' pentru a evita deprecierile.
+    Cere API-ului Gemini o recomandare bazată pe cărțile favorite din baza de date.
+    Returnează doar titlul și autorul.
     """
-    prompt = f"Analizeaza urmatoarea recenzie de carte si spune-mi daca sentimentul este Strict Pozitiv, Negativ sau Neutru. Ofera doar un cuvant ca raspuns. Recenzia: '{review_text}'"
+    if not favorite_books:
+        return "Nu ai nicio carte adăugată la favorite. Adaugă câteva pentru a primi o recomandare personalizată!"
+        
+    lista_carti = ", ".join(favorite_books)
     
-    # URL-ul actualizat cu alias-ul universal pentru ultima versiune disponibila gratuit
+    # Am modificat prompt-ul pentru a fi foarte restrictiv cu Gemini
+    prompt = f"Următoarele cărți sunt favoritele mele: {lista_carti}. Pe baza acestora, recomandă-mi o singură carte nouă de citit (care să nu fie în această listă). Trebuie să răspunzi STRICT cu titlul cărții și autorul, în formatul 'Titlu de Autor', fără absolut nicio altă explicație, salut, sau text suplimentar."
+    
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={API_KEY}"
-    
     headers = {'Content-Type': 'application/json'}
     payload = {
-        "contents": [{
-            "parts": [{"text": prompt}]
-        }]
+        "contents": [{"parts": [{"text": prompt}]}]
     }
     
     try:
@@ -30,11 +32,9 @@ def analyze_review_sentiment(review_text: str) -> str:
         response_data = response.json()
         
         if response.status_code == 200:
-            sentiment = response_data['candidates'][0]['content']['parts'][0]['text']
-            return sentiment.strip()
+            return response_data['candidates'][0]['content']['parts'][0]['text'].strip()
         else:
-            error_msg = response_data.get('error', {}).get('message', 'Eroare necunoscuta')
-            return f"Eroare REST API ({response.status_code}): {error_msg}"
+            return "Eroare la generarea recomandării."
             
     except Exception as e:
         return f"Eroare la conexiunea HTTP: {str(e)}"

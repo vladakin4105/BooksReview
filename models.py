@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Text, Boolean
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -10,10 +10,9 @@ class Book(Base):
     author = Column(String, index=True)
     genre = Column(String, index=True)
     description = Column(Text)
+    is_favorite = Column(Boolean, default=False) 
 
-    # Relatie 1 la Multi cu Recenziile
     reviews = relationship("Review", back_populates="book")
-
 
 class Review(Base):
     __tablename__ = "reviews"

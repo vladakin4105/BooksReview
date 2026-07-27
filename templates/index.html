@@ -8,40 +8,42 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">📚 Recenzii Cărți - Hackathon</h1>
-        
+    <div class="container mt-5">        
         <div class="row">
+            <!-- Coloana Stângă: Lista de cărți -->
             <div class="col-md-8">
-                <h3>Cărți în Baza de Date</h3>
+                <h3>Books❤️</h3>
                 <div class="list-group">
                     {% for book in books %}
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ book.title }}</h5>
-                                <small>{{ book.genre }}</small>
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">{{ book.title }}</h5>
+                                    <small class="text-muted">{{ book.genre }} | Autor: {{ book.author }}</small>
+                                </div>
+                                
+                                <button class="btn btn-sm btn-favorite {% if book.is_favorite %}btn-danger{% else %}btn-outline-danger{% endif %}" data-id="{{ book.id }}">
+                                    {% if book.is_favorite %}❤️ Elimină din Favorite{% else %}🤍 Adaugă la Favorite{% endif %}
+                                </button>
                             </div>
-                            <p class="mb-1">{{ book.description }}</p>
-                            <small>Autor: {{ book.author }}</small>
-                        </a>
+                            <p class="mb-1 mt-2">{{ book.description }}</p>
+                        </div>
                     {% else %}
                         <p class="text-muted">Nu există cărți momentan. Puteți adăuga manual din API sau rulați pipeline-ul Azure Data Factory.</p>
                     {% endfor %}
                 </div>
             </div>
 
+            <!-- Coloana Dreaptă: Funcționalități AI -->
             <div class="col-md-4">
-                <div class="card p-3 shadow-sm">
-                    <h4>Analiză AI Gemini ✨</h4>
-                    <p class="text-muted small">Testează sentimentul unei recenzii folosind API-ul Gemini.</p>
-                    <form id="geminiForm">
-                        <div class="mb-3">
-                            <textarea class="form-control" id="reviewText" rows="3" placeholder="Scrie o recenzie aici..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Analizează Sentimentul</button>
-                    </form>
-                    <div class="mt-3 text-center" id="aiResult"></div>
+                <!-- Card 2: Recomandare AI (NOU) -->
+                <div class="card p-3 shadow-sm border-success">
+                    <h4 class="text-success">Recomandare Personalizată 🎯</h4>
+                    <p class="text-muted small">Gemini va analiza lista ta de favorite și îți va propune o carte nouă.</p>
+                    <button id="btnRecommend" class="btn btn-success w-100">Obține Recomandare</button>
+                    <div class="mt-3 text-center" id="recommendationResult"></div>
                 </div>
+
             </div>
         </div>
     </div>
