@@ -109,9 +109,9 @@ h3, h4, h5 {
 
 /* Butonul plutitor din dreapta jos */
 .btn-floating-leaf {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 30px !important; /* Am schimbat 'right' cu 'left' */
     background-color: var(--orange-autumn);
     color: white;
     border: none;
@@ -122,26 +122,26 @@ h3, h4, h5 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-    z-index: 1000;
+    z-index: 1000 !important;
 }
 
 .btn-floating-leaf:hover {
-    transform: scale(1.1) rotate(15deg); /* Se rotește puțin la hover */
+    transform: scale(1.1) rotate(-15deg);
     background-color: #d68748;
 }
 
-/* Design-ul bilețelului / hârtiei vechi */
+/* Design-ul bilețelului / hârtiei vechi - Fixat permanent în STÂNGA */
 .vintage-note {
-    position: fixed;
-    bottom: 100px;
-    right: 40px;
+    position: fixed !important;
+    bottom: 100px !important;
+    left: 40px !important; /* Am schimbat 'right' cu 'left' */
     width: 250px;
-    background-color: #F4E7C3; /* Culoare de hârtie veche/gălbuie */
+    background-color: #F4E7C3;
     padding: 25px 20px;
-    border-radius: 2px 15px 5px 20px; /* Margini ușor neregulate */
+    border-radius: 2px 15px 5px 20px;
     box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(212, 163, 115, 0.2);
-    transform: rotate(3deg); /* Pare pus neglijent pe masă */
-    z-index: 999;
+    transform: rotate(-3deg); /* Am rotit pe partea stângă */
+    z-index: 999 !important;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -149,7 +149,7 @@ h3, h4, h5 {
 .hidden {
     opacity: 0;
     pointer-events: none;
-    transform: rotate(10deg) translateY(20px);
+    transform: rotate(-10deg) translateY(20px);
 }
 
 /* Textul scris de mână */
