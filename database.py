@@ -1,12 +1,20 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./book_reviews.db"
+# Incarcam variabilele de mediu din .env
+load_dotenv()
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+# Preluam link-ul de conexiune catre Azure din .env (sau lasam SQLite ca fallback daca nu exista)
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "AZURE_SQL_URL", 
+    "sqlite:///./book_reviews.db"
 )
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()

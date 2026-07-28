@@ -6,9 +6,9 @@ class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    author = Column(String, index=True)
-    genre = Column(String, index=True)
+    title = Column(String(255), index=True)
+    author = Column(String(255), index=True)
+    genre = Column(String(255), index=True)
     description = Column(Text)
     is_favorite = Column(Boolean, default=False) 
 
